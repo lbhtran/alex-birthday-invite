@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - copilot/create-static-website-invite
   workflow_dispatch:
 
 permissions:
