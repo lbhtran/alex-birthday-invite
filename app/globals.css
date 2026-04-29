@@ -9,6 +9,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Offset anchor jumps so the sticky nav doesn't cover section headings */
+  scroll-padding-top: 56px;
 }
 
 /* ═══════════════════════════════════════════
@@ -80,21 +82,16 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6rem 2rem 4rem;
-  overflow: hidden;
+  /* No overflow:hidden — lets leaf SVGs bleed across section
+     boundaries so scrolling between sections looks seamless */
 }
 
-/* ── Section-specific tints ── */
-.invite-section {
-  /* transparent — the body background shows through */
-  background: transparent;
-}
-
-.activities-section {
-  background: rgba(0, 15, 4, 0.55);
-}
-
+/* All sections share the same continuous body jungle background —
+   no per-section colour block means no visible jump when scrolling */
+.invite-section,
+.activities-section,
 .rsvp-section {
-  background: rgba(8, 10, 2, 0.50);
+  background: transparent;
 }
 
 /* ═══════════════════════════════════════════
@@ -204,7 +201,8 @@ body {
 
 /* ═══════════════════════════════════════════
    CSS JUNGLE LEAF SHAPES IN SECTION BG
-   Using border-radius tricks for depth
+   Constrained to avoid bleed now that
+   overflow:hidden is removed
 ═══════════════════════════════════════════ */
 .page-section::before,
 .page-section::after {
@@ -216,23 +214,59 @@ body {
 }
 
 .page-section::before {
-  width: 380px;
-  height: 650px;
-  top: -120px;
-  left: -130px;
+  width: 280px;
+  height: 480px;
+  top: 60px;
+  left: -90px;
   transform: rotate(-30deg);
-  opacity: 0.30;
+  opacity: 0.22;
   z-index: 0;
 }
 
 .page-section::after {
-  width: 300px;
-  height: 520px;
-  bottom: -100px;
-  right: -100px;
+  width: 220px;
+  height: 380px;
+  bottom: 60px;
+  right: -70px;
   transform: rotate(30deg);
-  opacity: 0.25;
+  opacity: 0.18;
   z-index: 0;
+}
+
+/* ═══════════════════════════════════════════
+   BOTANICAL VINE DIVIDER
+   A thin decorative strip between sections
+   so there's structure without a colour jump
+═══════════════════════════════════════════ */
+.vine-divider {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  /* Subtle horizontal fade lines either side of the leaf cluster */
+  overflow: hidden;
+}
+
+.vine-divider::before,
+.vine-divider::after {
+  content: "";
+  flex: 1;
+  max-width: 260px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(80, 190, 60, 0.35), transparent);
+}
+
+.vine-divider-leaves {
+  font-size: 1.4rem;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: #2a8a2a;
+  opacity: 0.75;
+  filter: drop-shadow(0 1px 3px rgba(0, 60, 0, 0.5));
 }
 
 /* ═══════════════════════════════════════════

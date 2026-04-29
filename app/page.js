@@ -83,6 +83,11 @@ export default function Home() {
         </a>
       </section>
 
+      {/* ── Botanical divider ── */}
+      <div className="vine-divider" aria-hidden="true">
+        <span className="vine-divider-leaves">🌿 🌱 🌿</span>
+      </div>
+
       {/* ══════════════════════════════════════
           SECTION 2 — Activities
       ══════════════════════════════════════ */}
@@ -125,6 +130,11 @@ export default function Home() {
 
         <a href="#rsvp" className="scroll-hint">Ready to join? ↓</a>
       </section>
+
+      {/* ── Botanical divider ── */}
+      <div className="vine-divider" aria-hidden="true">
+        <span className="vine-divider-leaves">🌿 🌱 🌿</span>
+      </div>
 
       {/* ══════════════════════════════════════
           SECTION 3 — RSVP
