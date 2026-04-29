@@ -1,59 +1,125 @@
-const confettiPieces = [
-  { left: "4%", duration: "3.6s", delay: "0.5s" },
-  { left: "12%", duration: "3.2s", delay: "0.9s" },
-  { left: "19%", duration: "4.1s", delay: "0.2s" },
-  { left: "27%", duration: "3.5s", delay: "0.8s" },
-  { left: "36%", duration: "4.3s", delay: "0.3s" },
-  { left: "45%", duration: "3.1s", delay: "1s" },
-  { left: "54%", duration: "4s", delay: "0.1s" },
-  { left: "62%", duration: "3.4s", delay: "1.2s" },
-  { left: "70%", duration: "4.2s", delay: "0.7s" },
-  { left: "78%", duration: "3.3s", delay: "0.4s" },
-  { left: "86%", duration: "4.4s", delay: "0.6s" },
-  { left: "94%", duration: "3.7s", delay: "1.1s" },
-];
+import Effects from "./components/Effects";
+
+// Replace this with your Google Form URL when ready.
+// If set to "#", the button will stay on the same page (no new tab).
+const RSVP_URL = "#";
 
 export default function Home() {
-  return (
-    <main className="scene">
-      <div className="party-item banner">Alex&apos;s Garden BBQ Birthday Bash</div>
+  const isRealUrl = RSVP_URL !== "#";
 
-      <section className="party-item invite-card">
-        <h1>You&apos;re Invited!</h1>
-        <p>Join me for a super fun birthday in the garden.</p>
-        <p>
-          <strong>Date:</strong> May 25th, 1991
-        </p>
+  return (
+    <>
+      {/* ── Sticky navigation ── */}
+      <nav className="nav">
+        <a href="#top">Home</a>
+        <a href="#cake">Cake</a>
+        <a href="#bbq">BBQ</a>
+        <a href="#music">Music</a>
+        <a href="#games">Games</a>
+        <a href="#rsvp">RSVP</a>
+      </nav>
+
+      {/* ── Hero ── */}
+      <section id="top" className="hero">
+        <span className="hero-emoji">🎉</span>
+        <h1>Alex&apos;s Birthday Bash!</h1>
+        <p className="hero-subtitle">You&apos;re invited to a Jungle Party 🌿</p>
+
+        <div className="hero-details">
+          <div className="hero-detail">
+            <span className="icon">📅</span>
+            <span>Saturday 23rd May 2026</span>
+          </div>
+          <div className="hero-detail">
+            <span className="icon">⏰</span>
+            <span>5pm onwards</span>
+          </div>
+          <div className="hero-detail">
+            <span className="icon">📍</span>
+            <span>156 Eredine Crescent, Milton Keynes, MK5 6GZ</span>
+          </div>
+        </div>
+
+        <a href="#cake" className="scroll-hint">
+          Scroll down to explore ↓
+        </a>
+
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
       </section>
 
-      <div className="party-item grill" aria-hidden="true">
-        <div className="smoke"></div>
-        <div className="grill-legs"></div>
-      </div>
+      {/* ── Cake ── */}
+      <section id="cake" className="cake-section">
+        <div className="section-card">
+          <span className="section-icon">🎂</span>
+          <h2>Birthday Cake</h2>
+          <p>What&apos;s a birthday without cake? There will be a delicious cake to celebrate!</p>
+          <p>Join us for the big cake cutting at sunset 🌅</p>
+        </div>
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
+      </section>
 
-      <div className="party-item cake" aria-hidden="true">
-        <div className="candles"></div>
-      </div>
+      {/* ── BBQ ── */}
+      <section id="bbq" className="bbq-section">
+        <div className="section-card">
+          <span className="section-icon">🔥</span>
+          <h2>BBQ Feast</h2>
+          <p>Fire up the grill! We&apos;ll have an amazing BBQ spread with all the good stuff.</p>
+          <p>Food served from 5pm onwards 🍖 🌽 🥗</p>
+        </div>
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
+      </section>
 
-      <div className="plants" aria-hidden="true">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div className="party-item plant" key={index}></div>
-        ))}
-      </div>
+      {/* ── Music ── */}
+      <section id="music" className="music-section">
+        <div className="section-card">
+          <span className="section-icon">🎵</span>
+          <h2>Music &amp; Dancing</h2>
+          <p>Get ready to dance! We&apos;ll have great music all night long.</p>
+          <p>From chill jungle vibes to party anthems 🎶 ✨</p>
+        </div>
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
+      </section>
 
-      <div className="party-item confetti" aria-hidden="true">
-        {confettiPieces.map((piece, index) => (
-          <span
-            className="piece"
-            key={index}
-            style={{
-              left: piece.left,
-              animationDuration: piece.duration,
-              animationDelay: piece.delay,
-            }}
-          ></span>
-        ))}
-      </div>
-    </main>
+      {/* ── Games ── */}
+      <section id="games" className="games-section">
+        <div className="section-card">
+          <span className="section-icon">🎮</span>
+          <h2>Games &amp; Fun</h2>
+          <p>Loads of garden games and activities for everyone!</p>
+          <p>Bring your A-game and get ready for some friendly competition 🏆</p>
+        </div>
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
+      </section>
+
+      {/* ── RSVP ── */}
+      <section id="rsvp" className="rsvp-section">
+        <div className="section-card">
+          <span className="section-icon">✉️</span>
+          <h2>RSVP</h2>
+          <p>Please let us know if you can make it!</p>
+          <p>Saturday 23rd May 2026, 5pm onwards</p>
+          <p>156 Eredine Crescent, Milton Keynes, MK5 6GZ</p>
+          <a
+            href={RSVP_URL}
+            className="rsvp-btn"
+            {...(isRealUrl
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            RSVP Now 🎉
+          </a>
+        </div>
+        <span className="leaf-left" aria-hidden="true">🌿</span>
+        <span className="leaf-right" aria-hidden="true">🌿</span>
+      </section>
+
+      {/* ── Ambient effects (client-side) ── */}
+      <Effects />
+    </>
   );
 }
