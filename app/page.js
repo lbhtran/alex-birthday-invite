@@ -4,106 +4,142 @@ import Effects from "./components/Effects";
 // If set to "#", the button will stay on the same page (no new tab).
 const RSVP_URL = "#";
 
+function LeafSVG({ className }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 100 260"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M50 0 C 80 22 100 95 84 192 Q 68 248 50 262 Q 32 248 16 192 C 0 95 20 22 50 0 Z"
+        fill="currentColor"
+      />
+      <path
+        d="M50 0 L50 262"
+        stroke="rgba(0,40,0,0.45)"
+        strokeWidth="1.5"
+        fill="none"
+      />
+      <path d="M50 55 Q32 70 24 92"  stroke="rgba(0,40,0,0.28)" strokeWidth="1" fill="none" />
+      <path d="M50 100 Q68 115 76 138" stroke="rgba(0,40,0,0.28)" strokeWidth="1" fill="none" />
+      <path d="M50 145 Q30 160 22 185" stroke="rgba(0,40,0,0.28)" strokeWidth="1" fill="none" />
+      <path d="M50 185 Q70 198 74 220" stroke="rgba(0,40,0,0.28)" strokeWidth="1" fill="none" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const isRealUrl = RSVP_URL !== "#";
 
   return (
     <>
-      {/* ── Sticky navigation ── */}
+      {/* ── Navigation ── */}
       <nav className="nav">
-        <a href="#top">Home</a>
-        <a href="#cake">Cake</a>
-        <a href="#bbq">BBQ</a>
-        <a href="#music">Music</a>
-        <a href="#games">Games</a>
+        <a href="#invite">Invite</a>
+        <a href="#activities">Activities</a>
         <a href="#rsvp">RSVP</a>
       </nav>
 
-      {/* ── Hero ── */}
-      <section id="top" className="hero">
-        <span className="hero-emoji">🎉</span>
-        <h1>Alex&apos;s Birthday Bash!</h1>
-        <p className="hero-subtitle">You&apos;re invited to a Jungle Party 🌿</p>
+      {/* ══════════════════════════════════════
+          SECTION 1 — Invite
+      ══════════════════════════════════════ */}
+      <section id="invite" className="page-section invite-section">
+        {/* Foreground jungle leaves */}
+        <LeafSVG className="leaf leaf--tl" />
+        <LeafSVG className="leaf leaf--tr" />
+        <LeafSVG className="leaf leaf--bl" />
+        <LeafSVG className="leaf leaf--br" />
 
-        <div className="hero-details">
-          <div className="hero-detail">
-            <span className="icon">📅</span>
-            <span>Saturday 23rd May 2026</span>
-          </div>
-          <div className="hero-detail">
-            <span className="icon">⏰</span>
-            <span>5pm onwards</span>
-          </div>
-          <div className="hero-detail">
-            <span className="icon">📍</span>
-            <span>156 Eredine Crescent, Milton Keynes, MK5 6GZ</span>
+        {/* The invite card */}
+        <div className="invite-card">
+          <p className="pre-title">~ You Are Invited ~</p>
+          <h1 className="invite-title">Alex&apos;s Birthday Bash!</h1>
+          <div className="ornament" aria-hidden="true">❧</div>
+          <p className="invite-sub">A Jungle Party in the Garden</p>
+          <hr className="card-divider" />
+          <div className="invite-details">
+            <div className="invite-detail">
+              <span className="detail-label">When</span>
+              <span className="detail-value">Saturday 23rd May 2026</span>
+            </div>
+            <div className="invite-detail">
+              <span className="detail-label">Time</span>
+              <span className="detail-value">5pm onwards</span>
+            </div>
+            <div className="invite-detail">
+              <span className="detail-label">Where</span>
+              <span className="detail-value">
+                156 Eredine Crescent<br />Milton Keynes, MK5 6GZ
+              </span>
+            </div>
           </div>
         </div>
 
-        <a href="#cake" className="scroll-hint">
-          Scroll down to explore ↓
+        <a href="#activities" className="scroll-hint">
+          Discover what&apos;s on ↓
         </a>
-
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
       </section>
 
-      {/* ── Cake ── */}
-      <section id="cake" className="cake-section">
+      {/* ══════════════════════════════════════
+          SECTION 2 — Activities
+      ══════════════════════════════════════ */}
+      <section id="activities" className="page-section activities-section">
+        <LeafSVG className="leaf leaf--tl" />
+        <LeafSVG className="leaf leaf--tr" />
+        <LeafSVG className="leaf leaf--bl" />
+        <LeafSVG className="leaf leaf--br" />
+
         <div className="section-card">
-          <span className="section-icon">🎂</span>
-          <h2>Birthday Cake</h2>
-          <p>What&apos;s a birthday without cake? There will be a delicious cake to celebrate!</p>
-          <p>Join us for the big cake cutting at sunset 🌅</p>
+          <p className="pre-title">~ What&apos;s On ~</p>
+          <h2 className="section-heading">The Festivities</h2>
+
+          <div className="activities-list">
+            <div className="activity-item">
+              <span className="activity-icon">🔥</span>
+              <div className="activity-text">
+                <h3>BBQ Feast</h3>
+                <p>Burgers, ribs, and all the good stuff hot off the grill — food from 5pm</p>
+              </div>
+            </div>
+
+            <div className="activity-item">
+              <span className="activity-icon">🎵</span>
+              <div className="activity-text">
+                <h3>Music &amp; Dancing</h3>
+                <p>Jungle vibes, party anthems and dancing under the stars all evening</p>
+              </div>
+            </div>
+
+            <div className="activity-item">
+              <span className="activity-icon">🎲</span>
+              <div className="activity-text">
+                <h3>Board Games</h3>
+                <p>Classic favourites and garden games — bring your competitive spirit!</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
+
+        <a href="#rsvp" className="scroll-hint">Ready to join? ↓</a>
       </section>
 
-      {/* ── BBQ ── */}
-      <section id="bbq" className="bbq-section">
-        <div className="section-card">
-          <span className="section-icon">🔥</span>
-          <h2>BBQ Feast</h2>
-          <p>Fire up the grill! We&apos;ll have an amazing BBQ spread with all the good stuff.</p>
-          <p>Food served from 5pm onwards 🍖 🌽 🥗</p>
-        </div>
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
-      </section>
+      {/* ══════════════════════════════════════
+          SECTION 3 — RSVP
+      ══════════════════════════════════════ */}
+      <section id="rsvp" className="page-section rsvp-section">
+        <LeafSVG className="leaf leaf--tl" />
+        <LeafSVG className="leaf leaf--tr" />
+        <LeafSVG className="leaf leaf--bl" />
+        <LeafSVG className="leaf leaf--br" />
 
-      {/* ── Music ── */}
-      <section id="music" className="music-section">
-        <div className="section-card">
-          <span className="section-icon">🎵</span>
-          <h2>Music &amp; Dancing</h2>
-          <p>Get ready to dance! We&apos;ll have great music all night long.</p>
-          <p>From chill jungle vibes to party anthems 🎶 ✨</p>
-        </div>
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
-      </section>
-
-      {/* ── Games ── */}
-      <section id="games" className="games-section">
-        <div className="section-card">
-          <span className="section-icon">🎮</span>
-          <h2>Games &amp; Fun</h2>
-          <p>Loads of garden games and activities for everyone!</p>
-          <p>Bring your A-game and get ready for some friendly competition 🏆</p>
-        </div>
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
-      </section>
-
-      {/* ── RSVP ── */}
-      <section id="rsvp" className="rsvp-section">
-        <div className="section-card">
-          <span className="section-icon">✉️</span>
-          <h2>RSVP</h2>
-          <p>Please let us know if you can make it!</p>
-          <p>Saturday 23rd May 2026, 5pm onwards</p>
-          <p>156 Eredine Crescent, Milton Keynes, MK5 6GZ</p>
+        <div className="section-card rsvp-card">
+          <p className="pre-title">~ Hope to See You There ~</p>
+          <h2 className="section-heading">RSVP</h2>
+          <p className="rsvp-text">Let us know if you can make it!</p>
+          <p className="rsvp-date">Saturday 23rd May 2026 · 5pm onwards</p>
           <a
             href={RSVP_URL}
             className="rsvp-btn"
@@ -111,11 +147,9 @@ export default function Home() {
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}
           >
-            RSVP Now 🎉
+            Count Me In! 🎉
           </a>
         </div>
-        <span className="leaf-left" aria-hidden="true">🌿</span>
-        <span className="leaf-right" aria-hidden="true">🌿</span>
       </section>
 
       {/* ── Ambient effects (client-side) ── */}

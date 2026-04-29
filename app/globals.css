@@ -1,4 +1,6 @@
-/* ── Reset ── */
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,14 +11,35 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ═══════════════════════════════════════════
+   BODY — JUNGLE BACKGROUND
+═══════════════════════════════════════════ */
 body {
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-  color: #f0ead6;
-  background: #0b200b;
+  font-family: 'Playfair Display', 'Palatino Linotype', Georgia, serif;
+  color: #f5f0e8;
   overflow-x: hidden;
+  min-height: 100vh;
+
+  /* Deep jungle base — layered canopy light effect */
+  background-color: #071507;
+  background-image:
+    /* Sunlight beams filtering through canopy */
+    radial-gradient(ellipse at 12% 8%,  rgba(60, 200, 30, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 88% 6%,  rgba(50, 180, 20, 0.10) 0%, transparent 35%),
+    radial-gradient(ellipse at 28% 42%, rgba(40, 160, 15, 0.09) 0%, transparent 30%),
+    radial-gradient(ellipse at 74% 55%, rgba(55, 190, 25, 0.10) 0%, transparent 32%),
+    radial-gradient(ellipse at 50% 88%, rgba(45, 170, 20, 0.09) 0%, transparent 35%),
+    radial-gradient(ellipse at 5%  75%, rgba(35, 140, 10, 0.08) 0%, transparent 28%),
+    radial-gradient(ellipse at 95% 80%, rgba(40, 150, 15, 0.08) 0%, transparent 30%),
+    /* Dark forest depth gradient */
+    linear-gradient(175deg, #0a1f0a 0%, #0d2a0d 30%, #0b220b 60%, #071507 100%);
+
+  background-attachment: fixed;
 }
 
-/* ── Navigation ── */
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
 .nav {
   position: fixed;
   top: 0;
@@ -25,21 +48,20 @@ body {
   z-index: 100;
   display: flex;
   justify-content: center;
-  gap: 0.75rem 1.5rem;
-  flex-wrap: wrap;
-  padding: 0.7rem 1rem;
-  background: rgba(5, 20, 5, 0.88);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(80, 180, 80, 0.25);
+  gap: 2.5rem;
+  padding: 0.9rem 1.5rem;
+  background: rgba(4, 14, 4, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(60, 160, 40, 0.22);
 }
 
 .nav a {
-  color: #90d890;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: #a8d898;
   text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
   transition: color 0.2s;
 }
 
@@ -47,8 +69,10 @@ body {
   color: #ffd700;
 }
 
-/* ── Sections ── */
-section {
+/* ═══════════════════════════════════════════
+   SECTIONS — BASE
+═══════════════════════════════════════════ */
+.page-section {
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -59,84 +83,376 @@ section {
   overflow: hidden;
 }
 
-/* ── Hero ── */
-.hero {
-  background: linear-gradient(160deg, #061406 0%, #0f320f 55%, #061406 100%);
+/* ── Section-specific tints ── */
+.invite-section {
+  /* transparent — the body background shows through */
+  background: transparent;
+}
+
+.activities-section {
+  background: rgba(0, 15, 4, 0.55);
+}
+
+.rsvp-section {
+  background: rgba(8, 10, 2, 0.50);
+}
+
+/* ═══════════════════════════════════════════
+   FOREGROUND JUNGLE LEAVES
+   (SVG elements absolutely positioned at
+    section corners — z-index ABOVE the card
+    so they appear in front of the scene)
+═══════════════════════════════════════════ */
+.leaf {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  color: #1e8020;
+  z-index: 5;
+  filter: drop-shadow(0 4px 12px rgba(0, 60, 0, 0.55));
+}
+
+/* Top-left: hangs diagonally down-right from the corner */
+.leaf--tl {
+  width: clamp(140px, 22vw, 280px);
+  top: -70px;
+  left: -65px;
+  transform: rotate(-38deg);
+  transform-origin: bottom right;
+  opacity: 0.88;
+}
+
+/* Top-right: mirror of tl */
+.leaf--tr {
+  width: clamp(140px, 22vw, 280px);
+  top: -70px;
+  right: -65px;
+  transform: rotate(38deg) scaleX(-1);
+  transform-origin: bottom left;
+  opacity: 0.82;
+  color: #1a7520;
+}
+
+/* Bottom-left: points upward from lower-left */
+.leaf--bl {
+  width: clamp(110px, 16vw, 210px);
+  bottom: -55px;
+  left: -50px;
+  transform: rotate(32deg);
+  transform-origin: top right;
+  opacity: 0.78;
+  color: #228b22;
+}
+
+/* Bottom-right: mirror of bl */
+.leaf--br {
+  width: clamp(110px, 16vw, 210px);
+  bottom: -55px;
+  right: -50px;
+  transform: rotate(-32deg) scaleX(-1);
+  transform-origin: top left;
+  opacity: 0.80;
+  color: #1c7a1c;
+}
+
+/* Gentle sway on the top leaves */
+.leaf--tl,
+.leaf--tr {
+  animation: leaf-sway-top 7s ease-in-out infinite alternate;
+}
+
+.leaf--tr {
+  animation-delay: -3.5s;
+}
+
+.leaf--bl,
+.leaf--br {
+  animation: leaf-sway-bottom 8s ease-in-out infinite alternate;
+}
+
+.leaf--br {
+  animation-delay: -4s;
+}
+
+@keyframes leaf-sway-top {
+  from { transform: rotate(-38deg); }
+  to   { transform: rotate(-30deg) translateY(-8px); }
+}
+
+.leaf--tr {
+  animation-name: leaf-sway-top-r;
+}
+
+@keyframes leaf-sway-top-r {
+  from { transform: rotate(38deg) scaleX(-1); }
+  to   { transform: rotate(30deg) scaleX(-1) translateY(-8px); }
+}
+
+@keyframes leaf-sway-bottom {
+  from { transform: rotate(32deg); }
+  to   { transform: rotate(25deg) translateY(6px); }
+}
+
+.leaf--br {
+  animation-name: leaf-sway-bottom-r;
+}
+
+@keyframes leaf-sway-bottom-r {
+  from { transform: rotate(-32deg) scaleX(-1); }
+  to   { transform: rotate(-25deg) scaleX(-1) translateY(6px); }
+}
+
+/* ═══════════════════════════════════════════
+   CSS JUNGLE LEAF SHAPES IN SECTION BG
+   Using border-radius tricks for depth
+═══════════════════════════════════════════ */
+.page-section::before,
+.page-section::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 0 80% 0 80%;
+  background: linear-gradient(135deg, #163c16, #0d2b0d);
+}
+
+.page-section::before {
+  width: 380px;
+  height: 650px;
+  top: -120px;
+  left: -130px;
+  transform: rotate(-30deg);
+  opacity: 0.30;
+  z-index: 0;
+}
+
+.page-section::after {
+  width: 300px;
+  height: 520px;
+  bottom: -100px;
+  right: -100px;
+  transform: rotate(30deg);
+  opacity: 0.25;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════
+   INVITE CARD  (parchment / invite feel)
+═══════════════════════════════════════════ */
+.invite-card {
+  position: relative;
+  z-index: 2;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(200, 160, 70, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(180, 140, 50, 0.10) 0%, transparent 55%),
+    linear-gradient(148deg, #fefaf0, #f7edcf, #fdf5e2);
+  background-color: #fdf5e2;
+  border: 1.5px solid rgba(160, 120, 40, 0.45);
+  border-radius: 3px;
+  /* Double-border invite frame effect */
+  outline: 5px solid transparent;
+  box-shadow:
+    0 0 0 2px rgba(160, 120, 40, 0.18),
+    0 0 0 7px rgba(160, 120, 40, 0.08),
+    0 0 0 9px rgba(160, 120, 40, 0.12),
+    0 24px 70px rgba(0, 0, 0, 0.55);
+  padding: 3.5rem 3rem;
+  max-width: 560px;
+  width: 100%;
   text-align: center;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 60%, rgba(80, 200, 50, 0.12) 0%, transparent 65%);
-  pointer-events: none;
+.pre-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: #8b6a14;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.85rem;
 }
 
-.hero-emoji {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 2.2s ease-in-out infinite;
+.invite-title {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  color: #2a6e2a;
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+  text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.ornament {
+  font-size: 2rem;
+  color: #b8860b;
+  margin: 0.4rem 0;
   display: block;
 }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
+.invite-sub {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #5a7a5a;
+  margin-bottom: 1.6rem;
 }
 
-.hero h1 {
-  font-size: clamp(2rem, 7vw, 5rem);
-  font-weight: 900;
-  background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ff7e00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.1;
-  margin-bottom: 0.6rem;
+.card-divider {
+  border: none;
+  border-top: 1.5px solid rgba(160, 120, 40, 0.32);
+  margin: 0 auto 1.6rem;
+  width: 55%;
 }
 
-.hero-subtitle {
-  font-size: clamp(1rem, 2.8vw, 1.4rem);
-  color: #90d890;
-  margin-bottom: 2.5rem;
-}
-
-.hero-details {
+.invite-details {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  margin: 0 auto 2rem;
-  max-width: 520px;
+  gap: 1.1rem;
 }
 
-.hero-detail {
+.invite-detail {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.detail-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.76rem;
+  color: #8b6a14;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.detail-value {
+  font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
-  color: #e8dfc8;
+  color: #2a2a18;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.hero-detail .icon {
-  font-size: 1.4rem;
+/* ═══════════════════════════════════════════
+   SECTION CARD  (dark glass — activities & rsvp)
+═══════════════════════════════════════════ */
+.section-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(5, 18, 5, 0.82);
+  border: 1px solid rgba(80, 190, 60, 0.22);
+  border-radius: 14px;
+  padding: 3rem 2.5rem;
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+.section-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 2rem;
+}
+
+/* ═══════════════════════════════════════════
+   ACTIVITIES LIST
+═══════════════════════════════════════════ */
+.activities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  text-align: left;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(80, 190, 60, 0.14);
+  border-radius: 10px;
+}
+
+.activity-icon {
+  font-size: 2.4rem;
   flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.1rem;
 }
 
+.activity-text h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #c0e898;
+  margin-bottom: 0.35rem;
+}
+
+.activity-text p {
+  font-size: 0.97rem;
+  color: #98bc98;
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════
+   RSVP CARD
+═══════════════════════════════════════════ */
+.rsvp-card {
+  text-align: center;
+}
+
+.rsvp-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #b8d8a8;
+  margin-bottom: 0.55rem;
+}
+
+.rsvp-date {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.98rem;
+  color: #98c888;
+  margin-bottom: 2rem;
+}
+
+.rsvp-btn {
+  display: inline-block;
+  padding: 1rem 3.5rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #1a1200;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(255, 200, 0, 0.35);
+}
+
+.rsvp-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 36px rgba(255, 200, 0, 0.60);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL HINT
+═══════════════════════════════════════════ */
 .scroll-hint {
   display: inline-block;
-  margin-top: 2rem;
-  color: #6ab86a;
-  font-size: 0.9rem;
+  margin-top: 2.5rem;
+  color: #78b878;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.92rem;
   text-decoration: none;
-  animation: pulse-fade 2.2s ease-in-out infinite;
+  animation: pulse-fade 2.4s ease-in-out infinite;
   transition: color 0.2s;
+  position: relative;
+  z-index: 2;
 }
 
 .scroll-hint:hover {
@@ -144,124 +460,13 @@ section {
 }
 
 @keyframes pulse-fade {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 1; }
 }
 
-/* ── Section card ── */
-.section-card {
-  background: rgba(5, 22, 5, 0.72);
-  border: 2px solid rgba(90, 190, 70, 0.3);
-  border-radius: 22px;
-  padding: 3rem 2.5rem;
-  max-width: 700px;
-  width: 100%;
-  text-align: center;
-  backdrop-filter: blur(12px);
-  position: relative;
-  z-index: 2;
-}
-
-.section-icon {
-  font-size: 4rem;
-  margin-bottom: 0.75rem;
-  display: block;
-  animation: bounce 2.5s ease-in-out infinite;
-}
-
-.section-card h2 {
-  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
-  font-weight: 900;
-  color: #ffd700;
-  margin-bottom: 1rem;
-}
-
-.section-card p {
-  font-size: 1.08rem;
-  line-height: 1.75;
-  color: #c5e0c2;
-  margin-bottom: 0.6rem;
-}
-
-.section-card p:last-of-type {
-  margin-bottom: 0;
-}
-
-/* ── Leaf decorations ── */
-.leaf-left,
-.leaf-right {
-  position: absolute;
-  bottom: 0;
-  font-size: 8rem;
-  opacity: 0.14;
-  pointer-events: none;
-  user-select: none;
-  line-height: 1;
-}
-
-.leaf-left {
-  left: -1.5rem;
-  transform: rotate(-25deg);
-}
-
-.leaf-right {
-  right: -1.5rem;
-  transform: rotate(25deg) scaleX(-1);
-}
-
-/* ── Section backgrounds ── */
-.hero {
-  background: linear-gradient(160deg, #061406 0%, #0f320f 55%, #061406 100%);
-}
-
-.cake-section {
-  background: linear-gradient(160deg, #0a1f12 0%, #163322 55%, #0a1f12 100%);
-}
-
-.bbq-section {
-  background: linear-gradient(160deg, #1f0f06 0%, #331a0a 55%, #1f0f06 100%);
-}
-
-.music-section {
-  background: linear-gradient(160deg, #0f0622 0%, #1e0f3c 55%, #0f0622 100%);
-}
-
-.games-section {
-  background: linear-gradient(160deg, #061a12 0%, #0c2e1e 55%, #061a12 100%);
-}
-
-.rsvp-section {
-  background: linear-gradient(160deg, #181206 0%, #28200a 55%, #181206 100%);
-}
-
-/* ── RSVP button ── */
-.rsvp-btn {
-  display: inline-block;
-  margin-top: 1.75rem;
-  padding: 1rem 3rem;
-  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
-  color: #1a1200;
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-decoration: none;
-  border-radius: 999px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 24px rgba(255, 200, 0, 0.4);
-}
-
-.rsvp-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 36px rgba(255, 200, 0, 0.65);
-}
-
-/* ── Fixed effects layers ── */
+/* ═══════════════════════════════════════════
+   AMBIENT EFFECTS LAYERS  (Effects.jsx)
+═══════════════════════════════════════════ */
 .fireflies,
 .confetti-container,
 .music-notes-container {
@@ -275,32 +480,20 @@ section {
 /* ── Firefly ── */
 .firefly {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #ffe066;
-  box-shadow: 0 0 8px 3px rgba(255, 224, 50, 0.85);
+  box-shadow: 0 0 7px 3px rgba(255, 224, 50, 0.80);
   animation: firefly-move linear infinite;
 }
 
 @keyframes firefly-move {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.35;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--fx, 120px), var(--fy, -80px));
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { opacity: 0.30; }
+  90%  { opacity: 1; }
+  100% { transform: translate(var(--fx, 120px), var(--fy, -80px)); opacity: 0; }
 }
 
 /* ── Confetti dot ── */
@@ -311,17 +504,9 @@ section {
 }
 
 @keyframes dot-fall {
-  from {
-    transform: translateY(-20px) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  to {
-    transform: translateY(100vh) rotate(720deg);
-    opacity: 0;
-  }
+  from { transform: translateY(-20px) rotate(0deg);    opacity: 0; }
+  10%  { opacity: 1; }
+  to   { transform: translateY(100vh)  rotate(720deg); opacity: 0; }
 }
 
 /* ── Music note ── */
@@ -329,40 +514,42 @@ section {
   position: absolute;
   font-size: 1.5rem;
   animation: note-float linear infinite;
-  color: rgba(255, 215, 0, 0.75);
+  color: rgba(255, 215, 0, 0.70);
 }
 
 @keyframes note-float {
-  from {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.85;
-  }
-  90% {
-    opacity: 0.85;
-  }
-  to {
-    transform: translateY(-120px) rotate(360deg);
-    opacity: 0;
-  }
+  from { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.80; }
+  90%  { opacity: 0.80; }
+  to   { transform: translateY(-120px) rotate(360deg); opacity: 0; }
 }
 
-/* ── Responsive ── */
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
 @media (max-width: 640px) {
   .nav {
-    gap: 0.4rem 0.8rem;
-    font-size: 0.75rem;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .invite-card {
+    padding: 2.5rem 1.75rem;
   }
 
   .section-card {
     padding: 2rem 1.25rem;
   }
 
-  .leaf-left,
-  .leaf-right {
-    font-size: 5rem;
-    opacity: 0.1;
+  .leaf--tl,
+  .leaf--tr {
+    width: 110px;
+    top: -50px;
+  }
+
+  .leaf--bl,
+  .leaf--br {
+    width: 85px;
+    bottom: -40px;
   }
 }
